@@ -5,15 +5,18 @@ import {config} from 'dotenv';
 import UserRouter from './routes/user.routes.js';
 import { connectDatabase } from './db/dbConnection.js';
 import urlRouter from './routes/url.routes.js';
+import cors from 'cors'
 
 config();
 const app=express();
 connectDatabase();
-
+app.use(cors({
+    origin: "http://localhost:5173"
+}))
 app.use(morgan('dev'));
 app.use(express.json());
 app.use('/user',UserRouter);
-app.use('/urls',urlRouter)
+app.use('/u',urlRouter)
 app.get('/',(req,res)=>{
     res.send("hello, You just connected to server!!");
 })

@@ -26,3 +26,16 @@ export const findUser=async({email,password})=>{
         throw new Error("user Email or password is wrong!!");
     }
 }
+export const findUserById=async(id)=>{
+    try{
+        const user=await userModel.findById(id).populate('urls')
+        if(user){
+            return user;
+        }
+        throw new Error("user not found !!")
+    }
+    catch(error){
+        // console.log(error)
+        throw new Error("user Email or password is wrong!!");
+    }
+}

@@ -1,6 +1,6 @@
 
 import { validationResult } from "express-validator";
-import { createUser, findUser } from "../services/userServices.js";
+import { createUser, findUser,findUserById } from "../services/userServices.js";
 import jwt from 'jsonwebtoken'
 
 export const signUpController = async (req, res) => {
@@ -35,5 +35,12 @@ export const signInController = async (req, res) => {
 }
 
 export const ProfileController = async (req, res) => {
-    res.status(200).json({ user: req.user })
+    try {
+        const id=req.user;
+        const user = await findUserById(id);
+        res.status(200).json({ user })
+    }
+    catch (error) {
+        return res.status(400).json({ error });
+    }
 }

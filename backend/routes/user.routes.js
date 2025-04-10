@@ -10,6 +10,6 @@ UserRouter.post('/SignUp', body('email').isEmail().withMessage('Email must be va
 UserRouter.post('/SignIn', body('email').isEmail().withMessage('Email must be valid'),
     body('password').isLength({ min: 3 }).withMessage('password must be at-least 3 characters long !!'), signInController)
 
-UserRouter.post('/getProfile', userAuth, ProfileController)
+UserRouter.get('/getProfile', userAuth, ProfileController)
 
 export default UserRouter;
