@@ -1,0 +1,23 @@
+import { configDotenv } from 'dotenv';
+import express from 'express'
+import morgan from 'morgan';
+import {config} from 'dotenv';
+import UserRouter from './routes/user.routes.js';
+import { connectDatabase } from './db/dbConnection.js';
+import urlRouter from './routes/url.routes.js';
+
+config();
+const app=express();
+connectDatabase();
+
+app.use(morgan('dev'));
+app.use(express.json());
+app.use('/user',UserRouter);
+app.use('/urls',urlRouter)
+app.get('/',(req,res)=>{
+    res.send("hello, You just connected to server!!");
+})
+
+app.listen(`${process.env.port}`,()=>{
+    console.log("server has started at http://localhost:3000");
+})
