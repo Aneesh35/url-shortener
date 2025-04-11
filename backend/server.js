@@ -21,6 +21,24 @@ app.get('/',(req,res)=>{
     res.send("hello, You just connected to server!!");
 })
 
-app.listen(`${process.env.port}`,()=>{
-    console.log("server has started at http://localhost:3000");
+// 404 handler middleware - add this before the error handler
+app.use((req, res, next) => {
+    res.status(404).json({
+        status: 'fail',
+        message: `Route ${req.originalUrl} not found on this server`
+    });
+});
+
+// Global error handling middleware
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500;
+    res.status(statusCode).json({
+        status: 'error',
+        message: err.message || 'Internal Server Error',
+        error: process.env.NODE_ENV === 'development' ? err : {}
+    });
+});
+
+app.listen(process.env.PORT || 3000, () => {
+    console.log(`server has started at http://localhost:${process.env.PORT || 3000}`);
 })
