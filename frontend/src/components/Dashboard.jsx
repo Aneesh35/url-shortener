@@ -159,7 +159,7 @@ const Dashboard = () => {
                   <div className="flex flex-col md:flex-row justify-between">
                     <div className="flex-1">
                       <p className="text-gray-400 text-sm mb-1">Short URL:</p>
-                      <p className="text-blue-400 break-all mb-2">{url.shortUrl}</p>
+                      <p className="text-blue-400 break-all mb-2">{import.meta.env.VITE_FRONTEND_URL+"/"+ url.shortUrl}</p>
                       <p className="text-gray-400 text-sm mb-1">Original URL:</p>
                       <p className="text-gray-300 break-all">{url.originalUrl}</p>
                     </div>
