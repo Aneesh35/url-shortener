@@ -11,7 +11,7 @@ config();
 const app=express();
 connectDatabase();
 app.use(cors({
-    origin: "http://localhost:5173"
+    origin: process.env.FRONTEND_URL
 }))
 app.use(morgan('dev'));
 app.use(express.json());
