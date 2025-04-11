@@ -11,7 +11,7 @@ config();
 const app=express();
 connectDatabase();
 app.use(cors({
-    origin: process.env.FRONTEND_URL
+    origin: process.env.FRONTEND_URL.split(',')
 }))
 app.use(morgan('dev'));
 app.use(express.json());
